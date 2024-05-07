@@ -1,12 +1,12 @@
 import 'react-native-gesture-handler';
-import { Counter } from './views/Counter';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import ToDoList from './src/ToDoList.jsx';
 
 const App = () => {
 	return (
 		<Provider store={store}>
-			<Counter />
+			<ToDoList></ToDoList>
 		</Provider>
 	);
 };
