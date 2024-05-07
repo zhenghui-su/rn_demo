@@ -1,16 +1,19 @@
 import React from 'react';
 import { Alert, Pressable, StyleSheet, Text, View } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { changeStatus, decrement } from '../redux/reducers';
+import { useToDoListStore } from '../zustand/ToDoListStore';
 // 一项一项的待办事项
 const List = () => {
 	// todolistItem 是从仓库拿到的数据
-	const todolistItem = useSelector((state) => state.todolist.listItem);
-	const dispatch = useDispatch(); // 通过 dispatch 方法来派发 action 对象
+	// const todolistItem = useSelector((state) => state.todolist.listItem);
+	// const dispatch = useDispatch(); // 通过 dispatch 方法来派发 action 对象
+	const todolistItem = useToDoListStore((state) => state.listItem);
+	const changeStatus = useToDoListStore((state) => state.changeStatus);
+	const decrement = useToDoListStore((state) => state.decrement);
 
 	// 短按, 切换已完成和未完成的状态
 	const pressHandle = (index) => {
-		dispatch(changeStatus(index));
+		// dispatch(changeStatus(index));
+		changeStatus(index);
 	};
 	// 删除
 	const longPressHandle = (index) => {
@@ -23,7 +26,8 @@ const List = () => {
 			{
 				text: '确定',
 				onPress: () => {
-					dispatch(decrement(index));
+					// dispatch(decrement(index));
+					decrement(index);
 				},
 				style: 'default',
 			},

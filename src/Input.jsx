@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { Button, StyleSheet, TextInput, View } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { increment } from '../redux/reducers';
+import { useToDoListStore } from '../zustand/ToDoListStore';
 
 // 负责接收用户的输入, 当用户点击确定时需要将输入内容同步到仓库里面
 const Input = () => {
 	const [inputValue, setInputValue] = useState('');
 
-	const dispatch = useDispatch();
-
+	// const dispatch = useDispatch();
+	const increment = useToDoListStore((state) => state.increment);
 	// 事件出来方法
 	const pressHandle = () => {
 		// 获取用户的输入, 通过 inputValue
 		// 调用 actionCreator 生成一个 action, 然后派发到仓库里面
-		dispatch(increment(inputValue));
+		// dispatch(increment(inputValue));
+		increment(inputValue);
 		setInputValue('');
 	};
 	return (
